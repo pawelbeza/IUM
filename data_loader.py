@@ -62,7 +62,7 @@ def get_data():
 
     add_new_attributes(sessions)
 
-    columns_to_drop = ['user_id', 'user_id', 'product_id', 'purchase_id', 'timestamp_event', 'purchase_timestamp',
+    columns_to_drop = ['user_id', 'user_id', 'product_id', 'purchase_id', 'timestamp', 'purchase_timestamp',
                        'street']
     sessions = sessions.drop(columns_to_drop, axis=1)
 

@@ -113,3 +113,8 @@ def get_data():
     sessions = sessions.drop(columns_to_drop, axis=1)
 
     return sessions
+
+
+if __name__ == "__main__":
+    sessions = get_data()
+    sessions.to_csv("merged_dataset", sep=' ')

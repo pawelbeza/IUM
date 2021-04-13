@@ -1,4 +1,3 @@
-import math
 from pathlib import Path
 
 import pandas as pd
@@ -50,9 +49,9 @@ def add_time_specific_attribs(data, df_group):
 
         data.at[index, 'duration'] = (session_date_end - session_date_start).total_seconds()
         data.at[index, 'weekend'] = session_date_end.weekday() >= 5
-        data.at[index, 'month'] = session_date_end.strftime("%B")
+        # data.at[index, 'month'] = session_date_end.strftime("%B")
         data.at[index, 'weekday'] = int(session_date_end.weekday())
-        data.at[index, 'day'] = session_date_end.day
+        # data.at[index, 'day'] = session_date_end.day
         data.at[index, 'hour'] = session_date_end.hour
 
 
@@ -77,7 +76,7 @@ def add_event_specific_attribs(data, df_group):
 def add_product_specific_attrib(data, df_group):
     unique_categories = set()
     for index, row in df_group.iterrows():
-        main_category = row.category_path.split(';', 1)[0] if not pandas.isna(row.category_path) else ''
+        main_category = row.category_path.split(';', 1)[0] if not pd.isna(row.category_path) else ''
         unique_categories.add(main_category)
         data.at[index, 'unique_categories'] = len(unique_categories)
 

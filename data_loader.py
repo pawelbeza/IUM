@@ -116,4 +116,4 @@ def get_data():
 
 if __name__ == "__main__":
     sessions = get_data()
-    sessions.to_csv("merged_dataset", sep=' ')
+    sessions.to_csv("merged_dataset", sep=' ', index=False)

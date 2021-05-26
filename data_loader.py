@@ -81,12 +81,37 @@ def add_product_specific_attrib(data, df_group):
         data.at[index, 'unique_categories'] = len(unique_categories)
 
 
+def add_prev_session_specific_attrib(data):
+    if len(data) == 0:
+        return
+
+    data.sort_values(['user_id', 'timestamp'], inplace=True)
+
+    was_last_session_buying = False
+    curr_session_buying = False
+
+    current_session = data.at[0, 'session_id']
+    current_user = data.at[0, 'user_id']
+    for index, row in data.iterrows():
+        if data.at[index, 'session_id'] != current_session:
+            if data.at[index, 'user_id'] != current_user:
+                current_user = data.at[index, 'user_id']
+                was_last_session_buying = False
+            else:
+                was_last_session_buying = curr_session_buying
+            current_session = data.at[index, 'session_id']
+
+        data.at[index, 'last_session_purchase'] = was_last_session_buying
+        curr_session_buying = data.at[index, 'purchase']
+
+
 def add_new_attributes(data):
     for _, df_group in data.groupby('session_id'):
         add_time_specific_attribs(data, df_group)
         add_event_specific_attribs(data, df_group)
         add_product_specific_attrib(data, df_group)
         add_purchase_attrib(data, df_group)
+    add_prev_session_specific_attrib(data)
 
 
 def fill_user_id_nan(data):
@@ -108,7 +133,8 @@ def get_data():
     fill_user_id_nan(sessions)
 
     columns_to_drop = ['product_id', 'purchase_id', 'timestamp', 'event_type', 'product_name',
-                       'category_path', 'price']
+                       'category_path']
+
     sessions = sessions.drop(columns_to_drop, axis=1)
 
     return sessions

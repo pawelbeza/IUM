@@ -12,8 +12,7 @@ with open('./models/logistic_reg.pkl', 'rb') as logistic_reg_pkl:
 
 def get_model_attributes(request_json):
     expected_json_attrib = ['user_id', 'offered_discount', 'price', 'duration', 'weekend', 'weekday', 'hour',
-                            'unique_item_views',
-                            'item_views', 'click_rate', 'last_session_purchase']
+                            'unique_item_views', 'item_views', 'click_rate', 'last_session_purchase']
 
     # check if map has expected keys
     if sorted(request_json.keys()) != sorted(expected_json_attrib):

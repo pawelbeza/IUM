@@ -1,9 +1,9 @@
-from app import app, models
+from app import app, models, prediction_archive
 from flask import request, abort
 
 
 def predict(model):
-    request_json = request.get_json()
+    request_json = request.get_json().copy()
     attributes = models.get_model_attributes(request_json)
 
     prediction = model.predict(attributes)
@@ -15,16 +15,22 @@ def predict(model):
 
 @app.route('/predict/random_forest', methods=['GET', 'POST'])
 def predict_random_forest():
+    prediction = predict(models.random_forest_model)
+    prediction_archive.insert_prediction(request.get_json(), prediction, "random_forest")
+
     return {
-        "prediction": predict(models.random_forest_model),
+        "prediction": prediction,
         "model": "random_forest"
     }
 
 
 @app.route('/predict/logistic_regression', methods=['GET', 'POST'])
 def predict_logistic_reg():
+    prediction = predict(models.logistic_reg_model)
+    prediction_archive.insert_prediction(request.get_json(), prediction, "logistic_regression")
+
     return {
-        "prediction": predict(models.logistic_reg_model),
+        "prediction": prediction,
         "model": "logistic_regression"
     }
 

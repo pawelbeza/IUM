@@ -83,7 +83,8 @@ EOF
 
 ### Predictions archive
 #### Run cmd line sqlite3 program
-`docker exec -it shopping_oracle sqlite3 /app/app/predictions.db`  
+`docker exec -it shopping_oracle sqlite3 /app/app/predictions.db`
+#### Query
 sqlite> SELECT * FROM prediction;  
 1|logistic_regression|102|0.0|553.0|1|1|0.0|1|4|4|0|0|0  
 2|random_forest|102|0.0|553.0|1|1|0.0|1|4|4|0|0|1  

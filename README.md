@@ -8,7 +8,9 @@
 `docker build -t shopping-oracle -f ./microservice/Dockerfile ./microservice/`
 
 ### Run container
-`docker run -d -p 8080:80 shopping-oracle`
+`docker run -d -p 8080:80 --name shopping_oracle shopping-oracle`
+#### Quick note
+Add volume `-v path_to_local_file_db:/app/app/predictions.db` if you want to persist your database on your host
 
 ### Run logistic regression prediction
 #### Examplary request
@@ -78,3 +80,11 @@ EOF
 
 #### Examplary output
 {"model":"logistic_regression","prediction":false}
+
+### Predictions archive
+#### Run cmd line sqlite3 program
+`docker exec -it shopping_oracle sqlite3 /app/app/predictions.db`  
+sqlite> SELECT * FROM prediction;  
+1|logistic_regression|102|0.0|553.0|1|1|0.0|1|4|4|0|0|0  
+2|random_forest|102|0.0|553.0|1|1|0.0|1|4|4|0|0|1  
+3|logistic_regression|102|0.0|553.0|1|1|0.0|1|4|4|0|0|0  

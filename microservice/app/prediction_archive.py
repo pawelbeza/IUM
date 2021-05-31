@@ -20,8 +20,6 @@ class Prediction(db.Model):
         self.user_id = prediction_dict['user_id']
         self.duration = prediction_dict['duration']
         self.price = prediction_dict['price']
-        self.unique_item_views = prediction_dict['unique_item_views']
-        self.item_views = prediction_dict['item_views']
         self.click_rate = prediction_dict['click_rate']
         self.last_session_purchase = prediction_dict['last_session_purchase']
         self.weekday = prediction_dict['weekday']
@@ -35,8 +33,6 @@ class Prediction(db.Model):
     user_id = db.Column(db.String, nullable=False)
     duration = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    unique_item_views = db.Column(db.Integer, nullable=False)
-    item_views = db.Column(db.Integer, nullable=False)
     click_rate = db.Column(db.Float, nullable=False)
     last_session_purchase = db.Column(db.Boolean, nullable=False)
     weekday = db.Column(db.Integer, nullable=False)

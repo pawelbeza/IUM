@@ -25,15 +25,13 @@ curl --request POST http://localhost:8080/predict/logistic_regression \
     "weekend" : false,  
     "weekday" : 4,  
     "hour" : 4,  
-    "unique_item_views" : 1,  
-    "item_views" : 1,  
     "click_rate" : 0,  
     "last_session_purchase" : true  
 }  
 EOF
 
 #### Examplary output
-{"model":"logistic_regression","prediction":false}
+{"model":"logistic_regression","prediction":true}
 
 ### Run random forest prediction
 #### Examplary request
@@ -47,9 +45,7 @@ curl --request POST http://localhost:8080/predict/random_forest \
     "duration" : 0.0,  
     "weekend" : false,  
     "weekday" : 4,  
-    "hour" : 4,  
-    "unique_item_views" : 1,  
-    "item_views" : 1,  
+    "hour" : 4,   
     "click_rate" : 0,  
     "last_session_purchase" : true  
 }  
@@ -71,15 +67,13 @@ curl --request POST http://localhost:8080/predict/testAB \
     "weekend" : false,  
     "weekday" : 4,  
     "hour" : 4,  
-    "unique_item_views" : 1,  
-    "item_views" : 1,  
     "click_rate" : 0,  
     "last_session_purchase" : true  
 }  
 EOF  
 
 #### Examplary output
-{"model":"logistic_regression","prediction":false}
+{"model":"logistic_regression","prediction":true}
 
 ### Predictions archive
 #### Run cmd line sqlite3 program
